@@ -1,14 +1,15 @@
 #include <stdio.h>
 
 void updateSector(int r, int c, int grid[r][c], int row, int col, int flag, int set) {
-    if (set) {
+    if(set){
         grid[row][col] |= (1 << flag);
-    } else {
+    } 
+	else{
         grid[row][col] &= ~(1 << flag);
     }
 }
 
-void querySector(int r, int c, int grid[r][c], int row, int col) {
+void querySector(int r, int c, int grid[r][c], int row, int col){
     int status = grid[row][col];
     printf("\n\nSector (%d, %d) Status:\n", row, col);
     printf("Power: %s\n", (status & 1) ? "ON" : "OFF");
@@ -16,35 +17,37 @@ void querySector(int r, int c, int grid[r][c], int row, int col) {
     printf("Maintenance Required: %s\n", (status & 4) ? "Yes" : "No");
 }
 
-void runDiagnostic(int r, int c, int grid[r][c]) {
+void runDiagnostic(int r, int c, int grid[r][c]){
     int overloaded = 0;
     int maintenance = 0;
-    for (int i = 0; i < r; i++) {
-        for (int j = 0; j < c; j++) {
-            if (grid[i][j] & 2) overloaded++;
-            if (grid[i][j] & 4) maintenance++;
+    for(int i = 0; i < r; i++){
+        for(int j = 0; j < c; j++){
+            if(grid[i][j] & 2) overloaded++;
+            if(grid[i][j] & 4) maintenance++;
         }
     }
     printf("\nTotal sectors overloaded: %d\n", overloaded);
     printf("Total sectors that require maintenance: %d\n", maintenance);
 }
 
-int main() {
+int main(){
     int r = 3, c = 3;
     int grid[r][c];
-    for (int i = 0; i < r; i++)
-        for (int j = 0; j < c; j++)
+    for(int i = 0; i < r; i++){
+        for(int j = 0; j < c; j++){
             grid[i][j] = 0;
+		}
+	}
     int input, row, col, flag, set;
     printf("GRID IS 3x3\n");
-	do {
+	do{
         printf("\nEnter \"1\" to Update Sector Status\n");
         printf("Enter \"2\" to Query Sector Status\n");
         printf("Enter \"3\" to Run System Diagnostic\n");
         printf("Enter \"4\" to Exit\n");
         printf("Input: ");
         scanf("%d", &input);
-        switch(input) {
+        switch(input){
             case 1:{
                 printf("\nEnter sector row : ");
                 scanf("%d", &row);
@@ -88,7 +91,8 @@ int main() {
             default:
                 printf("INVALID INPUT!\n");
         }
-    } while(input != 4);
+    }while(input != 4);
     return 0;
 }
+
 
